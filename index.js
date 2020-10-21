@@ -13,18 +13,17 @@ const app = express();
 //configurar CORS
 app.use(cors());
 
+//Lectura y parseo del body
+app.use(express.json());
+
 
 //base de datos
 dbConnection();
 
 //rutas
-app.get('/',(req,res)=>{
-
-    res.json({
-        ok:true,
-        msg:'hola mundo'
-    })
-});
+// nota ./routes/Routes-usuarios mismo nombre de la carpeta donde se encuentran mis rutas 
+app.use('/api/usuarios', require('./routes/Routes-usuarios') );
+app.use('/api/login', require('./routes/Routes-auth') );
 
 // para levantarlo
 app.listen( process.env.PORT, () => {
