@@ -9,18 +9,28 @@ const { generarJWT } = require('../helpers/jwt');
 //
 
 //=========================================================//
-const getUsuarios = async (req,res) => {
- // con estas {} llaves dentro del find especifico un filtro.
-  const  usuarios = await Usuario.find({},'nombre email google role');
+const getUsuarios = async (req,res=response) => {
+  
+   //paginacion
+     const desde = Number(req.query.desde) || 0;
+   // con la desestructuracion de arreglo extraigo el resultado de las promesa 
+   //usuario la primera y el total la segunda 
+   const [usuarios,total] = await Promise.all([
+   // con estas {} llaves dentro del find especifico un filtro, con el skip aplico la paginacion
+    Usuario.find({},'nombre email google role img').skip(desde).limit(5),
+    Usuario.countDocuments()
+   ]);
+
     res.json({
         ok:true,
-        usuarios
+        usuarios,
+        total
    });
    
 }
 //crear usuario
 // en el request(req) tengo lo que el usuario esta solicitando la peticion del usuario y ahi viene el body
-const PostUsuarios = async (req,res) => {
+const PostUsuarios = async (req,res=response) => {
 
   const {email,password,}= req.body;
 

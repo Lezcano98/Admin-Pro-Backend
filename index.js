@@ -22,8 +22,12 @@ dbConnection();
 
 //rutas
 // nota ./routes/Routes-usuarios mismo nombre de la carpeta donde se encuentran mis rutas 
-app.use('/api/usuarios', require('./routes/Routes-usuarios') );
-app.use('/api/login', require('./routes/Routes-auth') );
+app.use('/api/usuarios'  ,    require('./routes/Routes-usuarios'  ) );
+app.use('/api/hospitales',    require('./routes/Routes-hospitales') );
+app.use('/api/medicos'   ,    require('./routes/Routes-medicos'   ) );
+app.use('/api/todo'      ,    require('./routes/Routes-busquedas' ) );
+app.use('/api/login'     ,    require('./routes/Routes-auth'      ) );
+app.use('/api/uploads'   ,    require('./routes/Routes-uploads'   ) );
 
 // para levantarlo
 app.listen( process.env.PORT, () => {
