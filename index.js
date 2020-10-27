@@ -20,6 +20,9 @@ app.use(express.json());
 //base de datos
 dbConnection();
 
+//directorio publico
+app.use(express.static('public'));
+
 //rutas
 // nota ./routes/Routes-usuarios mismo nombre de la carpeta donde se encuentran mis rutas 
 app.use('/api/usuarios'  ,    require('./routes/Routes-usuarios'  ) );
