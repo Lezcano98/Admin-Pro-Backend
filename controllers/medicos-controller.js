@@ -56,21 +56,83 @@ const CrearMedicos = async (req,res=response) =>{
 }
 
 //Put
-const ActualizarMedicos = (req,res=response) =>{
+const ActualizarMedicos = async (req,res=response) =>{
 
-    res.json({
-     ok:true,
-     msg:'ActualizarMedicos'
-    });
+    const id = req.params.id;
+    //para capturar el usuario que realiza la actualizacion
+    const uid = req.uid;
+    //
+    const idhospital = req.body.hospital;
+   
+    try 
+    {
+        const medicoDB = await Medicos.findById(id);
+        if(!medicoDB && !idhospital){
+            return res.status(404).json({
+                ok:false,
+                msg:'El medico o el id de hospital que desea actualizar no existe',
+                id
+            }); 
+        }
+        else{
+
+            const cambiosmedicos={
+                ...req.body,
+                usuario:uid  
+               } 
+            const medicoActalizado = await Medicos.findByIdAndUpdate(id,cambiosmedicos,{ new:true } );
+             res.json({
+                ok:true,
+                medico:medicoActalizado
+               });
+        }
+      
+    } 
+    catch (error) 
+    {
+        console.log(error);
+        res.status(500).json({
+           ok:false,
+           msg:'Nose pudo Actualizar el Medico'
+        });
+    }
+
 
 }
 //Delete
-const EliminarMedicos = (req,res=response) =>{
-
-    res.json({
-     ok:true,
-     msg:'EliminarMedicos'
-    });
+const EliminarMedicos = async(req,res=response) =>{
+    
+    const id = req.params.id;
+    try 
+    {
+        const medicoDB = await Medicos.findById(id);
+        if(!medicoDB)
+        {
+            return res.status(404).json({
+                ok:false,
+                msg:'no se pudo eliminar ',
+                id
+            }); 
+        } 
+        
+        else
+        {
+            await Medicos.findByIdAndDelete(id);
+            res.json({
+                ok:true,   
+                });
+        }
+        
+    } 
+    catch (error) 
+    {
+        console.log(error);
+        res.status(500).json({
+           ok:false,
+           msg:'Nose pudo Actualizar el Medico'
+        });
+        
+    }
 
 }
 

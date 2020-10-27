@@ -30,10 +30,16 @@ router.post('/',
 CrearHospitales);
 
 //Put(Actualizar) nota:tener en cuenta los :id para evitar errores 
-router.put('/:id',[],ActualizarHospitales);
+router.put('/:id',
+    [
+        check('nombre','El nombre del hospital es requerido').not().isEmpty(),
+        validarJWT
+    ],
+ActualizarHospitales
+);
 
 //Delete (Borrar)
-router.delete('/:id',EliminarHospitales);
+router.delete('/:id',validarJWT,EliminarHospitales);
 
 
 //exportanto las rutas 
