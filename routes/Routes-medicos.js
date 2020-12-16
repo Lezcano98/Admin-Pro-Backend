@@ -7,7 +7,13 @@ const {Router} = require('express');
 //
 const {check} = require('express-validator');
 //
-const {getMedicos,CrearMedicos,ActualizarMedicos,EliminarMedicos} = require('../controllers/medicos-controller');
+const {
+    getMedicos,
+    CrearMedicos,
+    ActualizarMedicos,
+    EliminarMedicos, 
+    getMedicosById
+} = require('../controllers/medicos-controller');
 //
 const {validarCampos} = require('../middlewares/validar-campos');
 //
@@ -17,7 +23,7 @@ const { validarJWT } = require('../middlewares/validar-jwt');
 const router= Router();
 
 //get(Consultar)
-router.get('/',getMedicos);
+router.get('/',validarJWT,getMedicos);
 
 //post (Agregar)
 router.post('/',
@@ -44,6 +50,11 @@ ActualizarMedicos);
 
 //Delete (Borrar)
 router.delete('/:id',validarJWT,EliminarMedicos);
+
+//obtener un medico Especifico
+router.get('/:id',validarJWT,getMedicosById);
+
+
 
 //exportanto las rutas 
 module.exports = router;

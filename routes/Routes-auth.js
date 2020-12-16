@@ -41,4 +41,4 @@ router.get('/renew',validarJWT,renewToken);
 
 
 //
-module.exports=router;
+module.exports = router;

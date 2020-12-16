@@ -80,7 +80,7 @@ const PostUsuarios = async (req,res=response) => {
 
 const actualizarUsuario = async (req, res = response) => {
 //TODO: validar token y comprobar si es el usuario correcto 
-  const uid =req.params.id;
+  const uid = req.params.id;
   try {
 
      const usuarioDB = await Usuario.findById(uid);
@@ -93,13 +93,13 @@ const actualizarUsuario = async (req, res = response) => {
      }
 
      //actaulizaciones con la desestructuración de datos le indico que no actualice password,google,
-     // porqu los estoy extrayendo 
-     const {password,google,email, ...campos} = req.body;
+     // porque los estoy extrayendo 
+     const {password,google,email,...campos} = req.body;
 
-     if(usuarioDB !== email){  
+     if(usuarioDB.email !== email){  
 
       // esto lo realizo por si el correo ya existe registardo y el usuario ingresa uno igual a ese que ya esta registrado
-      const existeEmail =await Usuario.findOne({email});
+      const existeEmail = await Usuario.findOne({email});
       if( existeEmail ){
        return res.status(400).json({
         ok:false,
@@ -109,8 +109,18 @@ const actualizarUsuario = async (req, res = response) => {
       }
 
      }
-     campos.email=email;
+     if(!usuarioDB.google){
+      campos.email = email;
+     }
+     else if(usuarioDB.email !== email )
+     {
+       return res.status(400).json({
+        ok:false,
+        msg:'si a ingresdo con un usuario de google no puede cmabiar su correo'
+       });
 
+     }
+  
      const usuarioActualizado = await Usuario.findByIdAndUpdate(uid,campos,{new:true}); 
 
     res.json({

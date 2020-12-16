@@ -91,16 +91,16 @@ const fileUpload = ( req,res=response ) => {
 
 const retornarImagen = (req, res=response)=>{
 
-    const tipo= req.params.tipo;
-    const img =req.params.img;
+    const tipo = req.params.tipo;
+    const img  = req.params.img;
 
-    const pathImg =path.join(__dirname, `../uploads/${tipo}/${img}`);
+    const pathImg = path.join( __dirname, `../uploads/${tipo}/${img}`);
     //imagen por defecto 
     if( fs.existsSync(pathImg) ){
         res.sendFile(pathImg);
     }
     else{
-        const pathImg =path.join(__dirname, `../uploads/no-img.jpg`);
+        const pathImg = path.join( __dirname, `../uploads/no-img.jpg`);
         res.sendFile(pathImg); 
     }
     

@@ -107,7 +107,7 @@ const EliminarHospitales = async(req,res=response) =>{
         if(!hospitalDB){
             res.status(404).json({
                 ok:false,
-                msg:'Error contacte al adminitrador'
+                msg:'El Hospital que desa Eliminar no Existe '
              });
           }
 
@@ -124,7 +124,7 @@ const EliminarHospitales = async(req,res=response) =>{
         console.log(error);
         res.status(500).json({
            ok:false,
-           msg:'Error contacte al adminitrador'
+           msg:'Error Nose pudo eliminar el Hospital'
         });
         
     }

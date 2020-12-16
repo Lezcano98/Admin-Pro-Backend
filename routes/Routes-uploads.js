@@ -18,7 +18,7 @@ router.use(expressFileUpload());
 
 
 //get(recuperar imagen)
-router.get('/:tipo/:img',validarJWT,retornarImagen);
+router.get('/:tipo/:img',retornarImagen);
 
 
 //put(subir archivo)

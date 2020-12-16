@@ -10,27 +10,28 @@ const bcrypt = require('bcryptjs');
 const {googleVerify} = require('../helpers/google-verify');
 
 
+
 const login = async (req,res=response) => {
 
     const { email,password } = req.body;  
 
     try {
         //primero verificar que el email existe, en la bd
-        const usuarioDB= await Usuario.findOne({email});
+        const usuarioDB = await Usuario.findOne({email});
         // si no existe el usuario
         if(!usuarioDB){
          return res.status(404).json({
              ok:false,
-             msg:'Error Inesperado'
+             msg:'Ese correo no esta registrado '
 
          });
         }
         // verificar password, primero password que el usuaio escribio y luego el hash string que esta be la BD
-        const validPassword=bcrypt.compareSync(password,usuarioDB.password);
+        const validPassword = bcrypt.compareSync(password,usuarioDB.password);
         if( !validPassword ){
             return res.status(404).json({
                 ok:false,
-                msg:'Error inesperado contacte la adminitrador'
+                msg:'Clave incorrecta'
 
             });
         }
@@ -61,7 +62,7 @@ const googleSignIn = async (req,res=response) => {
      {
         const {name,email,picture} = await googleVerify(googleToken);
         //
-        const usuarioDB =await Usuario.findOne({ email });
+        const usuarioDB = await Usuario.findOne({ email });
         let usuario;
         if(!usuarioDB){
             //si no existe el usuario
@@ -103,18 +104,21 @@ const googleSignIn = async (req,res=response) => {
      }
 }
 
-const renewToken = async ( req, res=response ) => {
+const renewToken = async ( req, res = response ) => {
    
-    const uid=req.uid;
+    const uid = req.uid;
 
     //Generar el token JWT
     const token = await generarJWT(uid);
+    //obtner datos del usuario por uid guardado en el token 
+    const usuario = await Usuario.findById( uid );
 
     try 
     {
      res.json({
          ok:true,
          token,
+         usuario
      });
         
     } 

@@ -62,7 +62,7 @@ const  getEspeficicaColeccion= async (req,res=response) =>{
             break;
 
          case 'hospitales':
-            data = await Hospital.find({nombre:rexpr}).populate('usuario','nombre img');
+            data = await Hospital.find({nombre:rexpr}).populate('hospital','nombre img');
                 
             break;
 

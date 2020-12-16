@@ -36,13 +36,14 @@ router.put('/:id',
 [
     validarJWT,
     check('nombre','El nombre es obligatorio' ).not().isEmpty(),
-    check('email', 'El email es obligatorio y no debe estar repetido' ).isEmail().not().isEmpty(),
+    check('email', 'El email es obligatorio' ).isEmail(),
     check('role','el rol es obligatorio').not().isEmpty(),
     validarCampos,
    
 ],
 
-actualizarUsuario);
+actualizarUsuario
+);
 
 
 router.delete('/:id',validarJWT,borrarUsuario);
