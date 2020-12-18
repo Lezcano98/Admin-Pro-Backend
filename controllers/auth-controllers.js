@@ -8,6 +8,8 @@ const { generarJWT } = require('../helpers/jwt');
 const bcrypt = require('bcryptjs');
 //
 const {googleVerify} = require('../helpers/google-verify');
+//
+const {GetMenuFrondEnd}=require('../helpers/menu-frondEnd');
 
 
 
@@ -40,7 +42,8 @@ const login = async (req,res=response) => {
         ////=================////
           res.json({
             ok:true,
-            token
+            token,
+            menu:GetMenuFrondEnd(usuarioDB.role)
         });
         
     } 
@@ -90,7 +93,8 @@ const googleSignIn = async (req,res=response) => {
          res.json({
           ok:true,
           msg:'Google Sign-In',
-         token
+          token,
+          menu:GetMenuFrondEnd(usuario.role)
          });
          
      } 
@@ -118,7 +122,8 @@ const renewToken = async ( req, res = response ) => {
      res.json({
          ok:true,
          token,
-         usuario
+         usuario,
+         menu:GetMenuFrondEnd(usuario.role)
      });
         
     } 
