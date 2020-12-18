@@ -1,40 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo Login</title>
-    <meta name="google-signin-client_id" content="812207397503-ronmj4b8ltbt4vi8v1ae1evcimmf907e.apps.googleusercontent.com">
+  <meta charset="utf-8">
+  <title>AdminPro</title>
 
-</head>
-<body>
+  <base href="/"> 
 
-    <h1>Google Sing-in</h1>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <a href="#" onclick="signOut();">Sign out</a>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-signin-client_id" content="812207397503-ronmj4b8ltbt4vi8v1ae1evcimmf907e.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js"></script>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon.png">
+   <!-- Bootstrap Core CSS -->
+   <link href="./assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+   <!-- Custom CSS -->
+   <link href="./assets/css/style.css" rel="stylesheet">
+   <!-- You can change the theme colors from here -->
+   <link id="theme" rel="stylesheet">
+   <!--=============================================================================================-->
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+   
+<link rel="stylesheet" href="styles.ca344fab50a753501366.css"></head>
 
-    <script>
-        function onSignIn(googleUser) {
-      var profile = googleUser.getBasicProfile();
-      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-      console.log('Name: ' + profile.getName());
-      console.log('Image URL: ' + profile.getImageUrl());
-      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-       //generador de toke de google 
-      var id_token = googleUser.getAuthResponse().id_token;
-      console.log('este es el token'+ ' ' + id_token);
-    }
-    //cerrar sesion
-    function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-    });
-  }
+<body class="fix-header card-no-border fix-sidebar">
+  <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+      <div class="loader">
+          <div class="loader__figure"></div>
+          <p class="loader__label"><i class="fas fa-meteor fa-3x"></i>
+          Admin Pro
+          </p>
+      </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- Main wrapper - style you can find in pages.scss -->
+  <!--en el app-root carga mi apliacion de angular en el index -->
+  <app-root></app-root>
 
+  <!-- ============================================================== -->
+  <script src="./assets/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap tether Core JavaScript -->
+  <script src="./assets/plugins/bootstrap/js/popper.min.js"></script>
+  <script src="./assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <!-- slimscrollbar scrollbar JavaScript -->
+  <script src="./assets/js/perfect-scrollbar.jquery.min.js"></script>
+  <!--Wave Effects -->
+  <script src="./assets/js/waves.js"></script>
+  <!--Menu sidebar -->
+  <script src="./assets/js/sidebarmenu.js"></script>
+  <!--stickey kit -->
+  <script src="./assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+  <script src="./assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+  <!--Custom JavaScript -->
+  <script src="./assets/js/custom.js"></script>
+<!--===============================Charts.js=======================================================-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
-    </script>
-</body>
+<script src="runtime.2ecc76928cb1bcd088e5.js" defer></script><script src="polyfills.35a5ca1855eb057f016a.js" defer></script><script src="main.a4629f17d54e88e84521.js" defer></script></body>
 </html>
